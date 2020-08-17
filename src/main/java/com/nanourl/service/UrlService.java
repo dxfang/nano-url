@@ -55,8 +55,9 @@ public class UrlService {
         Url urlEntity = res.get();
 
         // If a nano URL is clicked more than 10 times, set it to expired
-        if (urlEntity.getClicks() > 10) {
+        if (urlEntity.getClicks() >= 10) {
             urlEntity.setExpired(1);
+            urlDao.save(urlEntity);
             return null;
         } else {
             urlEntity.setClicks(urlEntity.getClicks() + 1);     // Increase number of clicks by 1 and save changes
